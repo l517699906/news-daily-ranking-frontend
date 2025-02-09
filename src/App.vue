@@ -17,6 +17,8 @@ import { ref } from 'vue';
 import HotSearchBoard from "../src/components/HotSearchBoard.vue";
 import baiduIcon from "../src/assets/icons/baidu-icon.svg";
 import douyinIcon from "../src/assets/icons/douyin-icon.svg";
+import zhihuIcon from "../src/assets/icons/zhihu-icon.svg";
+import bilibiliIcon from "../src/assets/icons/bilibili-icon.svg";
 
 const hotBoards = ref([
   {
@@ -29,6 +31,16 @@ const hotBoards = ref([
     icon: douyinIcon,
     type: "douyin",
   },
+  {
+    title: "知乎",
+    icon: zhihuIcon,
+    type: "zhihu",
+  },
+  {
+    title: "B站",
+    icon: bilibiliIcon,
+    type: "bilibili",
+  }
 ]);
 </script>
 

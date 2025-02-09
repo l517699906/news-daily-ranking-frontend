@@ -42,9 +42,9 @@ const updateTime = ref(null);
 const loading = ref(false);
 
 const formattedUpdateTime = computed(() => {
-  if (!updateTime.value) return '';
+  const updateDate = new Date(updateTime.value ?? ''); // 使用可选链操作符和空值合并运算符
+  if (isNaN(updateDate.getTime())) return ''; // 检查日期是否有效
 
-  const updateDate = new Date(updateTime.value);
   const now = new Date();
   const timeDiff = now - updateDate;
   const minutesDiff = Math.floor(timeDiff / 1000 / 60);
@@ -63,7 +63,7 @@ const formattedUpdateTime = computed(() => {
 const fetchData = async (type) => {
   loading.value = true;
   try {
-    const res = await apiService.get(`/hotSearch/testQueryByType?type=${type}`);
+    const res = await apiService.get(`/hotSearch/queryByType?type=${type}`);
     hotSearchData.value = res.data.data.hotSearchDTOList;
     updateTime.value = res.data.data.updateTime;
   } catch (error) {
@@ -116,56 +116,58 @@ const openLink = (url) => {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  width:100%;
 }
 .custom-card:hover {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
 }
-
->>> .el-card__header {
-  padding: 10px 18px;
+>>> .el-card__body{
+  padding: 8px
 }
->>> .el-card__body {
+.el-card__header {
+  padding: 10px 18px;
   display: flex;
-  padding: 10px 0px 10px 10px;
+  justify-content: space-between; /* Added to space out title and update time */
+  align-items: center;
 }
 .card-title {
   display: flex;
   align-items: center;
   font-weight: bold;
   font-size: 16px;
+  flex-grow: 1;
 }
-
 .card-title-icon {
   fill: currentColor;
   width: 24px;
   height: 24px;
   margin-right: 8px;
 }
-
+.update-time {
+  font-size: 12px;
+  color: #b7b3b3;
+  margin-left: auto; /* Ensures it is pushed to the far right */
+}
 .cell-group-scrollable {
   max-height: 350px;
   overflow-y: auto;
-  padding-right: 16px; /* 恢复内容区域的内边距 */
+  padding-right: 16px;
   flex: 1;
 }
-
 .cell-wrapper {
   display: flex;
   align-items: center;
-  padding: 8px 8px; /* 减小上下内边距以减少间隔 */
-  border-bottom: 1px solid #e8e8e8; /* 为每个项之间添加分割线 */
+  padding: 8px 8px;
+  border-bottom: 1px solid #e8e8e8;
 }
-
 .cell-order {
   width: 20px;
   text-align: left;
   font-size: 16px;
   font-weight: 700;
   margin-right: 8px;
-  color: #7a7a7a; /* 统一非特殊序号颜色 */
+  color: #7a7a7a;
 }
-
-/* 通过在cell-heat类前面添加更多的父级选择器，提高了特异性 */
 .cell-heat {
   min-width: 50px;
   text-align: right;
@@ -178,26 +180,23 @@ const openLink = (url) => {
   line-height: 22px;
   flex-grow: 1;
   overflow: hidden;
-  text-align: left; /* 左对齐 */
-  text-overflow: ellipsis; /* 超出部分显示省略号 */
+  text-align: left;
+  text-overflow: ellipsis;
 }
 .top-ranking-1 .cell-order {
-  color: #fadb14;
-} /* 金色 */
-.top-ranking-2 .cell-order {
-  color: #a9a9a9;
-} /* 银色 */
-.top-ranking-3 .cell-order {
-  color: #d48806;
-} /* 铜色 */
-/* 新增的.hover-effect类用于标题的hover状态 */
-.cell-title.hover-effect {
-  cursor: pointer; /* 鼠标悬停时显示指针形状 */
-  transition: color 0.3s ease; /* 平滑地过渡颜色变化 */
+  color: #fadb14; /* 金色 */
 }
-
-/* 当鼠标悬停在带有.hover-effect类的元素上时改变颜色 */
+.top-ranking-2 .cell-order {
+  color: #a9a9a9; /* 银色 */
+}
+.top-ranking-3 .cell-order {
+  color: #d48806; /* 铜色 */
+}
+.cell-title.hover-effect {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
 .cell-title.hover-effect:hover {
-  color: #409eff; /* 或者使用你喜欢的颜色 */
+  color: #409eff;
 }
 </style>
