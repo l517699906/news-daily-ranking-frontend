@@ -27,6 +27,7 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    chunkSizeWarningLimit: 1600
   },
   css: {
     // 控制 CSS 的文件名 hash
