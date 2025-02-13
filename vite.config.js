@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import svgLoader from 'vite-svg-loader';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(),
+    svgLoader({
+      limit: 8192, // 8KB，小于 8KB 的文件会被内联
+    })
+  ],
   server:{
     proxy: {
       // 使用 "/api" 作为前缀的请求会被转发到下面的 target 地址
