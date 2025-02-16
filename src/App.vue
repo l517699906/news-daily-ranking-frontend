@@ -32,6 +32,10 @@ import tiebaIcon from "../src/assets/icons/tieba-icon.svg";
 import sougouIcon from "../src/assets/icons/sougou-icon.svg";
 import tencentIcon from "../src/assets/icons/tencent-icon.svg";
 import toutiaoIcon from "../src/assets/icons/toutiao-icon.svg";
+import weiboIcon from "../src/assets/icons/weibo-icon.svg";
+import hupuIcon from "../src/assets/icons/hupu-icon.svg";
+import juejinIcon from "../src/assets/icons/juejin-icon.svg";
+import csdnIcon from "../src/assets/icons/csdn-icon.svg";
 
 const searchQuery = ref("");
 const lastSearchQuery = ref("");
@@ -80,6 +84,26 @@ const hotBoards = reactive([
     title: "头条",
     icon: toutiaoIcon,
     type: "toutiao",
+  },
+  {
+    title: "微博",
+    icon: weiboIcon,
+    type: "weibo",
+  },
+  {
+    title: "虎扑",
+    icon: hupuIcon,
+    type: "hupu",
+  },
+  {
+    title: "掘金",
+    icon: juejinIcon,
+    type: "juejin",
+  },
+  {
+    title: "CSDN",
+    icon: csdnIcon,
+    type: "csdn",
   },
 ]);
 
