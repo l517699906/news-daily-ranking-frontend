@@ -1,26 +1,46 @@
 <template>
   <div id="app">
     <el-row :gutter="10">
-      <el-col :span="6" v-for="(board, index) in hotBoards" :key="index">
-        <hot-search-board
-            :title="board.title"
-            :icon="board.icon"
-            :type="board.type"
-        />
+      <el-col :span="20">
+        <el-row :gutter="10">
+          <el-col :span="6" v-for="(board, index) in hotBoards" :key="index">
+            <hot-search-board
+                :title="board.title"
+                :icon="board.icon"
+                :fetch-url="board.fetchUrl"
+                :type="board.type"
+            />
+          </el-col>
+        </el-row>
+      </el-col>
+      <el-col :span="4">
+        <visitor-log />
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import HotSearchBoard from "../src/components/HotSearchBoard.vue";
+import VisitorLog from "../src/components/VisitorLog.vue";
 import baiduIcon from "../src/assets/icons/baidu-icon.svg";
 import douyinIcon from "../src/assets/icons/douyin-icon.svg";
 import zhihuIcon from "../src/assets/icons/zhihu-icon.svg";
 import bilibiliIcon from "../src/assets/icons/bilibili-icon.svg";
+import tiebaIcon from "../src/assets/icons/tieba-icon.svg";
+import sougouIcon from "../src/assets/icons/sougou-icon.svg";
+import tencentIcon from "../src/assets/icons/tencent-icon.svg";
+import toutiaoIcon from "../src/assets/icons/toutiao-icon.svg";
 
-const hotBoards = ref([
+const searchQuery = ref("");
+const lastSearchQuery = ref("");
+const suggestions = ref([]);
+const loading = ref(false);
+const currentPage = ref(1);
+const pageSize = ref(20);
+const sentence = ref("");
+const hotBoards = reactive([
   {
     title: "百度",
     icon: baiduIcon,
@@ -40,11 +60,32 @@ const hotBoards = ref([
     title: "B站",
     icon: bilibiliIcon,
     type: "bilibili",
-  }
+  },
+  {
+    title: "贴吧",
+    icon: tiebaIcon,
+    type: "tieba",
+  },
+  {
+    title: "搜狗",
+    icon: sougouIcon,
+    type: "sougou",
+  },
+  {
+    title: "腾讯",
+    icon: tencentIcon,
+    type: "tencent",
+  },
+  {
+    title: "头条",
+    icon: toutiaoIcon,
+    type: "toutiao",
+  },
 ]);
+
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
