@@ -15,6 +15,7 @@
       </el-col>
       <el-col :span="4">
         <visitor-log />
+        <word-cloud />
       </el-col>
     </el-row>
   </div>
@@ -24,6 +25,7 @@
 import { ref, reactive } from 'vue';
 import HotSearchBoard from "../src/components/HotSearchBoard.vue";
 import VisitorLog from "../src/components/VisitorLog.vue";
+import WordCloud from "../src/components/WordCloud.vue";
 import baiduIcon from "../src/assets/icons/baidu-icon.svg";
 import douyinIcon from "../src/assets/icons/douyin-icon.svg";
 import zhihuIcon from "../src/assets/icons/zhihu-icon.svg";

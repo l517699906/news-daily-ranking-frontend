@@ -13,6 +13,8 @@
     "element-plus": "^2.8.2",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.4.37",
+    "vue-wordcloud": "^1.1.1",
+    "vue3-word-cloud": "^1.0.4",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
